@@ -1,27 +1,81 @@
-/*
-This is your site JavaScript code - you can add interactivity and carry out processing
-- Initially the JS writes a message to the console, and moves a button you can add from the README
-*/
-
-// Print a message in the browser's dev tools console each time the page loads
-// Use your menus or right-click / control-click and choose "Inspect" > "Console"
-console.log("Hello 🌎");
-
-/* 
-Make the "Click me!" button move when the visitor clicks it:
-- First add the button to the page by following the "Next steps" in the README
-*/
-const btn = document.querySelector("button"); // Get the button from the page
-// Detect clicks on the button
-if (btn) {
-  btn.onclick = function() {
-    // The JS works in conjunction with the 'dipped' code in style.css
-    btn.classList.toggle("dipped");
-  };
-}
-
-// This is a single line JS comment
-/*
-This is a comment that can span multiple lines 
-- use comments to make your own notes!
-*/
+!(function () {
+  "use strict";
+  function e(e) {
+    try {
+      if ("undefined" == typeof console) return;
+      "error" in console ? console.error(e) : console.log(e);
+    } catch (e) {}
+  }
+  function t(e) {
+    return (
+      (d.innerHTML = '<a href="' + e.replace(/"/g, "&quot;") + '"></a>'),
+      d.childNodes[0].getAttribute("href") || ""
+    );
+  }
+  function r(e, t) {
+    var r = e.substr(t, 2);
+    return parseInt(r, 16);
+  }
+  function n(n, c) {
+    for (var o = "", a = r(n, c), i = c + 2; i < n.length; i += 2) {
+      var l = r(n, i) ^ a;
+      o += String.fromCharCode(l);
+    }
+    try {
+      o = decodeURIComponent(escape(o));
+    } catch (u) {
+      e(u);
+    }
+    return t(o);
+  }
+  function c(t) {
+    for (var r = t.querySelectorAll("a"), c = 0; c < r.length; c++)
+      try {
+        var o = r[c],
+          a = o.href.indexOf(l);
+        a > -1 && (o.href = "mailto:" + n(o.href, a + l.length));
+      } catch (i) {
+        e(i);
+      }
+  }
+  function o(t) {
+    for (var r = t.querySelectorAll(u), c = 0; c < r.length; c++)
+      try {
+        var o = r[c],
+          a = o.parentNode,
+          i = o.getAttribute(f);
+        if (i) {
+          var l = n(i, 0),
+            d = document.createTextNode(l);
+          a.replaceChild(d, o);
+        }
+      } catch (h) {
+        e(h);
+      }
+  }
+  function a(t) {
+    for (var r = t.querySelectorAll("template"), n = 0; n < r.length; n++)
+      try {
+        i(r[n].content);
+      } catch (c) {
+        e(c);
+      }
+  }
+  function i(t) {
+    try {
+      c(t), o(t), a(t);
+    } catch (r) {
+      e(r);
+    }
+  }
+  var l = "/cdn-cgi/l/email-protection#",
+    u = ".__cf_email__",
+    f = "data-cfemail",
+    d = document.createElement("div");
+  i(document),
+    (function () {
+      var e =
+        document.currentScript || document.scripts[document.scripts.length - 1];
+      e.parentNode.removeChild(e);
+    })();
+})();
